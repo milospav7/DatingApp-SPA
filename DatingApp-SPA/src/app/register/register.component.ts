@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -12,13 +13,18 @@ export class RegisterComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter(); // output podaci, koriste se da posaljes nesto ka parent komponnti(supr od input)
   model: any = {};
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
   }
 
   register() {
-    console.log(this.model);
+    this.authService.register(this.model) // moramo da uradimo .subscribe da bismo mogli da koristmo response u nasoj komponenti
+      .subscribe(() => {
+        console.log('Registered!');
+      }, (error) => {
+        console.log(error);
+      });
   }
 
   cancel() {
