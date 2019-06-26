@@ -27,6 +27,7 @@ namespace DatingApp.API.Controllers
       _repo = repo;
     }
 
+    [AllowAnonymous]
     [HttpPost("register")]
     public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
     {
@@ -45,7 +46,7 @@ namespace DatingApp.API.Controllers
       return StatusCode(201);
     }
 
-
+    [AllowAnonymous]
     [HttpPost("login")]
     public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
     {

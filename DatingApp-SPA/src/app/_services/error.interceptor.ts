@@ -8,6 +8,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(req).pipe(
             catchError(err => {
+                console.log(err);
                 if (err instanceof HttpErrorResponse) { // ako je greska sa API-ja(hendlovana) => http error
                     if (err.status === 401) {
                         return throwError(err.statusText);
